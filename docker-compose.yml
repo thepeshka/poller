@@ -7,4 +7,5 @@ services:
       context: .
       dockerfile: ./deploy/python.dockerfile
     command: "/var/www/manage.py run-server"
-    ports: "8080:8000"
+    ports:
+      - "8080:8000"
