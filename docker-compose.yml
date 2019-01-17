@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  poller:
+    image: poller_python_image
+    build:
+      context: .
+      dockerfile: ./deploy/python.dockerfile
+    command: "/var/www/manage.py run-server"
