@@ -36,7 +36,7 @@ except IOError:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["172.17.*.*"]
+ALLOWED_HOSTS = ["172.17.*.*", "192.168.1.*"]
 
 
 # Application definition
