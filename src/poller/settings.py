@@ -36,7 +36,8 @@ except IOError:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["172.17.*.*", "192.168.1.*"]
+ALLOWED_HOSTS = ['172.17.{}.{}:8080'.format(i, j) for i in range(256) for j in range(256)] + \
+                ['192.168.1.{}:8080'.format(i) for i in range(256)] + ["poller.thepeshka.ru"]
 
 
 # Application definition
