@@ -8,3 +8,6 @@ WORKDIR /var/www
 COPY ./requirements.txt /var/www/requirements.txt
 RUN pip install -r /var/www/requirements.txt
 COPY ./src /var/www
+COPY ./deploy/entrypoint_python.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT /entrypoint.sh
