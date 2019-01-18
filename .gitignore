@@ -1,6 +1,7 @@
 venv
 .idea
 src/secret.txt
+src/db.sqlite3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
