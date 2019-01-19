@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.forms import CharField, PasswordInput
 
+from authentication.models import User
+
 
 class LoginForm(forms.Form):
     username = CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
@@ -26,13 +28,16 @@ class RegistrationForm(forms.Form):
 
     def clean(self):
         cleaned_data = self.cleaned_data
-        user = authenticate(username=self.cleaned_data.get('username'), password=self.cleaned_data.get('password'))
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+        user = User.objects.filter(username=self.cleaned_data.get('username')).first()
 
-        if user is not None and not user.is_anonymous:
-            setattr(self, 'user', user)
-            return cleaned_data
-        else:
+        if user:
             raise forms.ValidationError(
-                "Unknown user"
+                "User with this username already created!"
             )
+        else:
+            setattr(self, 'username', username)
+            setattr(self, 'password', password)
+            return cleaned_data
 
