@@ -8,6 +8,7 @@ from authentication.models import User
 class LoginView(FormView):
     template_name = "login.html"
     form_class = LoginForm
+    success_url = "/"
 
     def form_valid(self, form):
         login(self.request, form.user)
@@ -17,7 +18,10 @@ class LoginView(FormView):
 class RegistrationView(FormView):
     template_name = "register.html"
     form_class = RegistrationForm
+    success_url = "/"
 
     def form_valid(self, form):
         user = User(username=form.username, password=form.password)
+        user.save()
+        login(self.request, user)
         return super().form_valid(form)
