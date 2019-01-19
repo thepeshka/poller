@@ -11,9 +11,3 @@ class LoginView(FormView):
     def form_valid(self, form):
         login(self.request, form.user)
         return super().form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-
-        return context

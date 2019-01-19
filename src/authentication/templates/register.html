@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block body %}
+    <form method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            {{ field }}
+        {% endfor %}
+        <input id="password2" type="password" placeholder="Repeat password">
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <input type="submit" value="Register" />
+    </form>
+    <script>
+        $('form').submit(function(){
+            if ($('input[name="password"]').value !== $('#password2').value){
+                if ($(".alert")){
+                    $(".alert").remove()
+                }
+                $("input[type='submit']").before($('<div class="alert alert-danger" role="alert"><p>The passwords do ' +
+                    'not match</p></div>'));
+                return false;
+            }
+            return true;
+        })
+    </script>
+{% endblock %}
