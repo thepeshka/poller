@@ -5,7 +5,7 @@ from authentication.forms import LoginForm, RegistrationForm
 
 
 class LoginView(FormView):
-    template_name = "login_view.html"
+    template_name = "login.html"
     form_class = LoginForm
 
     def form_valid(self, form):
@@ -14,7 +14,7 @@ class LoginView(FormView):
 
 
 class RegistrationView(FormView):
-    template_name = "login_view.html"
+    template_name = "register.html"
     form_class = RegistrationForm
 
     def form_valid(self, form):
