@@ -18,19 +18,16 @@
     </form>
     <script>
         $('form').submit(function(event){
-            if ($('input[name="password"]').value !== $('#password2').value){
+            if ($('input[name="password"]').val() !== $('#password2').val()){
                 if ($(".alert")){
                     $(".alert").remove()
                 }
                 $("input[type='submit']").before($('<div class="alert alert-danger" role="alert"><p>The passwords do ' +
                     'not match</p></div>'));
                 event.preventDefault();
-                console.log(false);
                 return false;
             }
-            event.preventDefault();
-            console.log(true);
-            return false;
+            return true;
         })
     </script>
 {% endblock %}
