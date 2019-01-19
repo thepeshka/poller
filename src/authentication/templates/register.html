@@ -17,16 +17,20 @@
         <input type="submit" value="Register" />
     </form>
     <script>
-        $('form').submit(function(){
+        $('form').submit(function(event){
             if ($('input[name="password"]').value !== $('#password2').value){
                 if ($(".alert")){
                     $(".alert").remove()
                 }
                 $("input[type='submit']").before($('<div class="alert alert-danger" role="alert"><p>The passwords do ' +
                     'not match</p></div>'));
+                event.preventDefault();
+                console.log(false);
                 return false;
             }
-            return true;
+            event.preventDefault();
+            console.log(true);
+            return false;
         })
     </script>
 {% endblock %}
