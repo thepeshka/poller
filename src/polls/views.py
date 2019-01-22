@@ -7,6 +7,6 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.request.GET.get("alert"):
-            context["alert"] = alerts.get(self.request.GET.get("alert"))
+        if self.request.GET.get():
+            context["alert"] = alerts.get()
         return context

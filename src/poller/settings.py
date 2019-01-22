@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ['172.17.{}.{}'.format(i, j) for i in range(256) for j in range(
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
