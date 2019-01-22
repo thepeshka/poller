@@ -23,7 +23,9 @@ class RegistrationView(FormView):
     success_url = "/"
 
     def get(self, *args, **kwargs):
-        if settings.REGISTRATION_IS_OPEN or self.request.GET.get("secret") == settings.REGISTRATION_SECRET:
+        if self.request.user.is_authenticated:
+            return redirect("/")
+        elif settings.REGISTRATION_IS_OPEN or self.request.GET.get("secret") == settings.REGISTRATION_SECRET:
             return super().get(self, *args, **kwargs)
         else:
             return redirect("/?alert=registration_closed")
