@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from utils import SecretFile
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -20,24 +22,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_FILE = os.path.join(BASE_DIR, 'secret.txt')
-try:
-    SECRET_KEY = open(SECRET_FILE).read().strip()
-except IOError:
-    import random
-
-    SECRET_KEY = ''.join(
-        [random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in
-         range(50)])
-    secret = open(SECRET_FILE, 'w+')
-    secret.write(SECRET_KEY)
-    secret.close()
+SECRET_FILE = SecretFile(os.path.join(BASE_DIR, 'secrets.json'))
+SECRET_KEY = SECRET_FILE["DJANGO"]
+REGISTRATION_SECRET = SECRET_FILE["REGISTRATION"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['172.17.{}.{}'.format(i, j) for i in range(256) for j in range(256)] + \
-                ['192.168.1.{}'.format(i) for i in range(256)] + ["poller.thepeshka.ru"]
+                ['192.168.1.{}'.format(i) for i in range(256)] + ["poller.thepeshka.ru", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -139,3 +132,5 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 AUTH_USER_MODEL = 'auth.User'
+
+REGISTRATION_IS_OPEN = False

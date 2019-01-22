@@ -1,6 +1,6 @@
 venv
 .idea
-src/secret.txt
+src/secrets.json
 src/db.sqlite3
 
 # Byte-compiled / optimized / DLL files
