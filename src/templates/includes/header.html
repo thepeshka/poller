@@ -4,6 +4,6 @@
         <a href="{% url "auth:logout" %}"><span id="logout" class="sign-link">Sign out</span></a>
     {% else %}
         <a href="{% url "auth:login" %}"><span id="logout" class="sign-link">Sign in</span></a>
-        <a href="{% url "auth:login" %}"><span id="register" class="sign-link">Registration</span></a>
+        <a href="{% url "auth:registration" %}"><span id="registration" class="sign-link">Registration</span></a>
     {% endif %}
 </header>

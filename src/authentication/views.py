@@ -1,8 +1,9 @@
-from django.contrib.auth import login
-from django.contrib.auth import logout as _logout
+from django.contrib.auth import logout, login
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.views.generic import FormView, RedirectView
+from django.views import View
+from django.views.generic import FormView
 from django.conf import settings
 
 from authentication.forms import LoginForm, RegistrationForm
@@ -34,7 +35,7 @@ class RegistrationView(FormView):
         elif settings.REGISTRATION_IS_OPEN or self.request.GET.get("secret") == settings.REGISTRATION_SECRET:
             return super().get(self, *args, **kwargs)
         else:
-            return redirect("/?alert=registration_closed")#reverse("polls.home") + "?alert=registration_closed")
+            return redirect(reverse("polls:home") + "?alert=registration_closed")
 
     def form_valid(self, form):
         user = User(username=form.username, password=form.password)
@@ -43,9 +44,7 @@ class RegistrationView(FormView):
         return super().form_valid(form)
 
 
-class LogoutView(RedirectView):
-    pattern_name = "polls:home"
-
-    def get(self, **kwargs):
-        _logout(self.request)
-        return super().get(self, **kwargs)
+class LogoutView(View):
+    def get(self, *args, **kwargs):
+        logout(self.request)
+        return HttpResponseRedirect(reverse("polls:home"))

@@ -1,5 +1,4 @@
 from django import forms
-from django.contrib.auth import authenticate
 from django.forms import CharField, PasswordInput
 
 from authentication.models import User
@@ -11,14 +10,16 @@ class LoginForm(forms.Form):
 
     def clean(self):
         cleaned_data = self.cleaned_data
-        user = authenticate(username=self.cleaned_data.get('username'), password=self.cleaned_data.get('password'))
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+        user = User.objects.filter(username=username, password=password).first()
 
-        if user is not None and not user.is_anonymous:
+        if user is not None:
             setattr(self, 'user', user)
             return cleaned_data
         else:
             raise forms.ValidationError(
-                "Unknown user"
+                "Username or password is incorrect"
             )
 
 
