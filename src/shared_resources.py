@@ -3,6 +3,7 @@ class Alert:
         self.type = type
         self.content = content
 
+
 alerts = {
     "registration_closed": Alert("warn", "Registration is closed")
 }

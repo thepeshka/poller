@@ -29,8 +29,8 @@ REGISTRATION_SECRET = SECRET_FILE["REGISTRATION"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.17.{}.{}'.format(i, j) for i in range(256) for j in range(256)] + \
-                ['192.168.1.{}'.format(i) for i in range(256)] + ["poller.thepeshka.ru", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ['172.1.*.*', '192.168.1.*', "poller.thepeshka.ru", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS_MODE = "wildcard"
 
 
 # Application definition
