@@ -9,4 +9,4 @@ services:
     volumes:
       - "./src:/var/www"
     ports:
-      - "8080:8000"
+      - "7654:8000"
